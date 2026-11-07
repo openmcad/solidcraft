@@ -500,6 +500,10 @@ pub struct UiState {
     pub view_angles_lock_pitch: bool,
     pub view_angles_lock_roll: bool,
     pub palette_open: bool,
+    /// The application bar and the ribbon. A host that draws its own chrome
+    /// (a tablet layout) turns them off and calls the pieces it still wants itself.
+    pub show_app_bar: bool,
+    pub show_toolbar: bool,
     /// Dark theme (the default); a preference kept between runs.
     pub dark: bool,
     /// Selection filter: kinds a click doesn't pick (`vertices`, `edges`, `faces`, `sketch`).
@@ -549,6 +553,8 @@ impl Default for UiState {
             view_angles_lock_pitch: false,
             view_angles_lock_roll: false,
             palette_open: false,
+            show_app_bar: true,
+            show_toolbar: true,
             dark: true,
             pick_off: Vec::new(),
             render_pick: "face".into(),
@@ -4976,7 +4982,11 @@ impl SolveApp {
             view_windows::show_clean(self, ui);
             return;
         }
-        if !self.embedded && !self.embed_editor {
+        if !self.ui.show_toolbar {
+            // The ribbon publishes where the command search sits; without it the field has no place.
+            ui.ctx().data_mut(|d| d.remove::<egui::Rect>(egui::Id::unique("sc_ribbon_search")));
+        }
+        if !self.embedded && !self.embed_editor && self.ui.show_app_bar {
             toolbar::app_bar(self, ui);
         }
         app_bar_custom::shield(self, ui.ctx());
