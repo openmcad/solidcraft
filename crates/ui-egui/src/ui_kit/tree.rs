@@ -151,7 +151,10 @@ pub(crate) fn tree_row(ui: &mut egui::Ui, id: egui::Id, row: &Row) -> RowResp {
     // A stable id per row (not the layout position), so a press and its release stay on the
     // same row while rows above open or close.
     let (r, _) = ui.allocate_exact_size(vec2(ui.available_width(), height), Sense::hover());
-    let resp = ui.interact(r, id, Sense::click_and_drag());
+    // On a touch screen a finger's drag scrolls the tree (the ScrollArea's own drag, registered
+    // under the rows); a row is dragged with a mouse.
+    let sense = if ui.input(|i| i.has_touch_screen()) { Sense::click() } else { Sense::click_and_drag() };
+    let resp = ui.interact(r, id, sense);
     // While something is dragged (an appearance swatch, drawn under the pointer) `hovered` is
     // off; the row under the pointer still counts, so a drop lands on it.
     let dragged_over = egui::DragAndDrop::has_any_payload(ui.ctx()) && ui.input(|i| i.pointer.hover_pos()).is_some_and(|p| r.contains(p));
