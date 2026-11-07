@@ -1207,7 +1207,7 @@ impl crate::SolveApp {
         // Chrome paints and receives input above the full-domain scene. Its
         // measured rectangles affect usable space, never the camera projection.
         crate::status_bar::show(self, ui);
-        if !self.embedded {
+        if !self.embedded && self.ui.show_toolbar {
             crate::toolbar::toolbar(self, ui);
         }
         crate::ui_kit::Container::new(ui.ctx(), crate::ui_kit::Surface::Viewport)
