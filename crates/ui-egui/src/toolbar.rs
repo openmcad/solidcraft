@@ -742,7 +742,9 @@ impl FileAction {
     }
 }
 
-fn file_menu(app: &mut SolveApp, ctx: &egui::Context) {
+/// The File menu, open while the `sc_file_menu` temp is true, at `sc_file_menu_x` and
+/// `sc_file_menu_y` (the app bar's bottom). A host with its own bar opens it the same way.
+pub fn file_menu(app: &mut SolveApp, ctx: &egui::Context) {
     let id = egui::Id::unique("sc_file_menu");
     if !ctx.data(|d| d.get_temp::<bool>(id).unwrap_or(false)) {
         return;
@@ -750,7 +752,9 @@ fn file_menu(app: &mut SolveApp, ctx: &egui::Context) {
     let mut close = false;
     let resp = Container::new(ctx, Surface::Popup)
         .area(egui::Id::unique("sc_file_area"))
-        .fixed_pos(pos2(ctx.data(|d| d.get_temp::<f32>(egui::Id::unique("sc_file_menu_x"))).unwrap_or(100.0), APP_BAR_HEIGHT))
+        .fixed_pos(ctx.data(|d| {
+            pos2(d.get_temp::<f32>(egui::Id::unique("sc_file_menu_x")).unwrap_or(100.0), d.get_temp::<f32>(egui::Id::unique("sc_file_menu_y")).unwrap_or(APP_BAR_HEIGHT))
+        }))
         .order(egui::Order::Foreground)
         .show(ctx, |ui| {
             crate::ui_kit::Menu::show_frame(ui, crate::ui_kit::Menu::frame(), |ui| {
