@@ -342,7 +342,10 @@ pub(crate) fn draw_row(ui: &mut egui::Ui, id: egui::Id, row: &Row) -> RowResp {
     // A stable id per row (not the layout position), so a press and its release stay on the
     // same row while rows above open or close.
     let (r, _) = ui.allocate_exact_size(vec2(ui.available_width(), ROW_H), Sense::hover());
-    let resp = ui.interact(r, id, Sense::click_and_drag());
+    // On a touch screen a finger's drag scrolls the tree (the ScrollArea's own drag, registered
+    // under the rows); a row is dragged with a mouse.
+    let sense = if ui.input(|i| i.has_touch_screen()) { Sense::click() } else { Sense::click_and_drag() };
+    let resp = ui.interact(r, id, sense);
     // While something is dragged (an appearance swatch, drawn under the pointer) `hovered` is
     // off; the row under the pointer still counts, so a drop lands on it.
     let dragged_over = egui::DragAndDrop::has_any_payload(ui.ctx()) && ui.input(|i| i.pointer.hover_pos()).is_some_and(|p| r.contains(p));
@@ -425,7 +428,10 @@ pub(crate) fn draw_row(ui: &mut egui::Ui, id: egui::Id, row: &Row) -> RowResp {
     }
     let col = row.color.unwrap_or(if row.dim { t.text_dim } else { t.text });
     let label_display = if row.name { crate::i18n::tr_name(row.label) } else { crate::i18n::tr_dyn(row.label) };
-    let galley = ui.painter().layout_no_wrap(label_display, FontId::proportional(12.5), col);
+    // A name longer than the row is elided, so it never runs past the panel's edge.
+    let mut job = egui::text::LayoutJob::simple_singleline(label_display, FontId::proportional(12.5), col);
+    job.wrap = egui::text::TextWrapping::truncate_at_width((r.right() - x).max(0.0));
+    let galley = ui.painter().layout_job(job);
     let lw = galley.size().x;
     ui.painter().galley(pos2(x, cy - galley.size().y / 2.0), galley, col);
     let mut bx = (x + lw + 6.0).min(r.right() - 16.0);
@@ -838,7 +844,6 @@ fn rows_scrolling(app: &mut SolveApp, ui: &mut egui::Ui, acts: &mut Actions, shr
     acts.lit = Lit::of(app);
     egui::ScrollArea::vertical()
         .auto_shrink([false, shrink_height])
-        .scroll_source(egui::scroll_area::ScrollSource { scroll_bar: true, mouse_wheel: true, ..egui::scroll_area::ScrollSource::NONE })
         .show(ui, |ui| {
             ui.spacing_mut().item_spacing.y = 0.0;
             component_rows(app, ui, 0, 0, acts);
