@@ -231,6 +231,11 @@ pub struct UiState {
     pub perspective: bool,
     pub show_sketches: bool,
     pub palette_open: bool,
+    /// The application bar, the ribbon and the command line. A host that draws its own chrome
+    /// (a tablet layout) turns them off and calls the pieces it still wants itself.
+    pub show_app_bar: bool,
+    pub show_toolbar: bool,
+    pub show_palette_bar: bool,
     /// Dark theme (the default); a preference kept between runs.
     pub dark: bool,
     /// Selection filter: kinds a click doesn't pick (`vertices`, `edges`, `faces`, `sketch`).
@@ -264,6 +269,9 @@ impl Default for UiState {
             perspective: false,
             show_sketches: true,
             palette_open: false,
+            show_app_bar: true,
+            show_toolbar: true,
+            show_palette_bar: true,
             dark: true,
             pick_off: Vec::new(),
             pick_bodies: false,
@@ -1437,7 +1445,9 @@ impl SolveApp {
         scenario::clear_handles();
         self.poll_deferred(ui.ctx());
         self.poll_delete_check(ui.ctx());
-        toolbar::app_bar(self, ui);
+        if self.ui.show_app_bar {
+            toolbar::app_bar(self, ui);
+        }
         issue_report::CadInput::block(self, ui, report_input);
         file_load::show(self, ui.ctx());
         documents::prompt(self, ui.ctx());
@@ -1451,13 +1461,17 @@ impl SolveApp {
                 return;
             }
         }
-        toolbar::toolbar(self, ui);
+        if self.ui.show_toolbar {
+            toolbar::toolbar(self, ui);
+        }
         let show_timeline = self.ui.show_timeline && !render_workspace::active(self);
         let left_timeline = show_timeline && self.preferences.timeline_left;
         if show_timeline && !left_timeline {
             timeline::timeline(self, ui);
         }
-        palette::palette_bar(self, ui);
+        if self.ui.show_palette_bar {
+            palette::palette_bar(self, ui);
+        }
         // A floating browser keeps the workspace the whole width: it is drawn over the view below.
         let browser_float = self.ui.show_browser && self.preferences.browser_float;
         if self.ui.show_browser && !browser_float {
