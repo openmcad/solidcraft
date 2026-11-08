@@ -793,11 +793,11 @@ pub fn file_menu(app: &mut SolveApp, ctx: &egui::Context) {
                         ui.close();
                     }
                 });
-                if item_if(ui, "Insert STEP…", "", "import", shown) {
+                if item_if(ui, app.tr_label("Insert STEP…"), "", "import", shown) {
                     FileAction::Command("file.insert_step").run(app);
                     close = true;
                 }
-                if item_if(ui, "Insert Mesh…", "", "import", shown) {
+                if item_if(ui, app.tr_label("Insert Mesh…"), "", "import", shown) {
                     FileAction::Command("file.insert_mesh").run(app);
                     close = true;
                 }
@@ -819,12 +819,12 @@ pub fn file_menu(app: &mut SolveApp, ctx: &egui::Context) {
                     FileAction::SaveAs.run(app);
                     close = true;
                 }
-                if item(ui, "Save As JSON…", "", "save") {
+                if item(ui, app.tr_label("Save As JSON…"), "", "save") {
                     FileAction::SaveJson.run(app);
                     close = true;
                 }
                 // The browser build: a copy as a downloaded file, whatever Save does.
-                if app.services.download_design.is_some() && item_if(ui, "Download design", "", "export", shown) {
+                if app.services.download_design.is_some() && item_if(ui, app.tr_label("Download design"), "", "export", shown) {
                     download_design(app);
                     close = true;
                 }
@@ -839,11 +839,11 @@ pub fn file_menu(app: &mut SolveApp, ctx: &egui::Context) {
                 let key = |id: &str| crate::keymap::effective(app, id).unwrap_or_default();
                 let (stl_key, mf_key, step_key, obj_key, urdf_key) =
                     (key("file.export_stl"), key("file.export_3mf"), key("file.export_step"), key("file.export_obj"), key("file.export_urdf"));
-                if item_if(ui, "Export STL…", &stl_key, "mesh_export", shown) {
+                if item_if(ui, app.tr_label("Export STL…"), &stl_key, "mesh_export", shown) {
                     FileAction::Command("file.export_stl").run(app);
                     close = true;
                 }
-                if item_if(ui, "Export 3MF…", &mf_key, "mesh_export", shown) {
+                if item_if(ui, app.tr_label("Export 3MF…"), &mf_key, "mesh_export", shown) {
                     FileAction::Command("file.export_3mf").run(app);
                     close = true;
                 }
@@ -851,7 +851,7 @@ pub fn file_menu(app: &mut SolveApp, ctx: &egui::Context) {
                     app.start("file.send_to_slicer");
                     close = true;
                 }
-                if item_if(ui, "Export STEP…", &step_key, "export", shown) {
+                if item_if(ui, app.tr_label("Export STEP…"), &step_key, "export", shown) {
                     FileAction::Command("file.export_step").run(app);
                     close = true;
                 }
@@ -859,15 +859,15 @@ pub fn file_menu(app: &mut SolveApp, ctx: &egui::Context) {
                     FileAction::Command("file.export_view_dxf").run(app);
                     close = true;
                 }
-                if item_if(ui, "Export OBJ…", &obj_key, "export", shown) {
+                if item_if(ui, app.tr_label("Export OBJ…"), &obj_key, "export", shown) {
                     FileAction::Command("file.export_obj").run(app);
                     close = true;
                 }
-                if item_if(ui, "Export URDF…", &urdf_key, "export", shown) {
+                if item_if(ui, app.tr_label("Export URDF…"), &urdf_key, "export", shown) {
                     FileAction::Command("file.export_urdf").run(app);
                     close = true;
                 }
-                if item(ui, "Export Design as JSON…", "", "export") {
+                if item(ui, app.tr_label("Export Design as JSON…"), "", "export") {
                     FileAction::Export("json").run(app);
                     close = true;
                 }
