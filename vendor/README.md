@@ -314,3 +314,6 @@ SolidCraft changes:
   Ctrl/Shift/Alt from another application otherwise saw stale `GetKeyState == 0` until the
   modifier was released and pressed again (#20352). Test:
   `effective_modifiers_tracks_unfocused_and_inherited_keys` (Windows).
+- `src/platform_impl/ios/window.rs`: `inner_size` is the whole window, as `Resized` reports it
+  (winit 0.31's `surface_size`), not the safe area; eframe 0.37 sizes its surface from it on
+  every resize, and a surface the size of the safe area was stretched over the whole screen.
