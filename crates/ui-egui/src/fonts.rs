@@ -484,6 +484,8 @@ const FONT_CANDIDATES: &[&str] = &[
     "/System/Library/Fonts/AppleSDGothicNeo.ttc",
     "/Library/Fonts/Arial Unicode.ttf",
     "/Library/Fonts/Hiragino Sans W3.ttc",
+    // iOS and iPadOS: system fonts live in subfolders (the macOS directory scan does not run there)
+    "/System/Library/Fonts/Core/HiraginoKakuGothic.ttc",
     // Linux
     "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
     "/usr/share/fonts/truetype/noto/NotoSansCJK-Regular.ttc",
@@ -513,6 +515,8 @@ const HANGUL_FONT_CANDIDATES: &[&str] = &[
     // macOS: Apple SD Gothic Neo
     "/System/Library/Fonts/AppleSDGothicNeo.ttc",
     "/System/Library/Fonts/Supplemental/AppleGothic.ttf",
+    // iOS and iPadOS: Apple SD Gothic Neo
+    "/System/Library/Fonts/Core/AppleSDGothicNeo.ttc",
     // Linux: Nanum Gothic (Noto Sans CJK already covers Hangul)
     "/usr/share/fonts/truetype/nanum/NanumGothic.ttf",
     "/usr/share/fonts/nanum/NanumGothic.ttf",
@@ -531,6 +535,8 @@ const THAI_FONT_CANDIDATES: &[&str] = &[
     "/System/Library/Fonts/Supplemental/Thonburi.ttc",
     "/System/Library/Fonts/Supplemental/Ayuthaya.ttf",
     "/Library/Fonts/Thonburi.ttf",
+    // iOS and iPadOS: Thonburi
+    "/System/Library/Fonts/Core/Thonburi.ttc",
     // Linux: Noto Sans Thai, TLWG Loma and Garuda
     "/usr/share/fonts/noto/NotoSansThai-Regular.ttf",
     "/usr/share/fonts/truetype/noto/NotoSansThai-Regular.ttf",
@@ -609,6 +615,8 @@ const CHINESE_FONT_CANDIDATES: &[&str] = &[
     "/System/Library/Fonts/Supplemental/Songti.ttc",
     "/System/Library/Fonts/Supplemental/Arial Unicode.ttf",
     "/Library/Fonts/Arial Unicode.ttf",
+    // iOS and iPadOS: PingFang
+    "/System/Library/PrivateFrameworks/FontServices.framework/CorePrivate/PingFangUI.ttc",
     // Linux: Noto Sans CJK SC
     "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
     "/usr/share/fonts/truetype/noto/NotoSansCJK-Regular.ttc",
