@@ -502,11 +502,11 @@ pub fn file_menu(app: &mut SolveApp, ctx: &egui::Context) {
                         ui.close();
                     }
                 });
-                if item_if(ui, "Insert STEP…", "", shown) {
+                if item_if(ui, app.tr_label("Insert STEP…"), "", shown) {
                     app.start("file.insert_step");
                     close = true;
                 }
-                if item_if(ui, "Insert Mesh…", "", shown) {
+                if item_if(ui, app.tr_label("Insert Mesh…"), "", shown) {
                     app.start("file.insert_mesh");
                     close = true;
                 }
@@ -522,16 +522,16 @@ pub fn file_menu(app: &mut SolveApp, ctx: &egui::Context) {
                     save_as(app);
                     close = true;
                 }
-                if item(ui, "Save As JSON…", "") {
+                if item(ui, app.tr_label("Save As JSON…"), "") {
                     save_as_with_extension(app, "json");
                     close = true;
                 }
                 ui.separator();
-                if item_if(ui, "Save as mesh…", "", shown) {
+                if item_if(ui, app.tr_label("Save as mesh…"), "", shown) {
                     app.start("file.save_mesh");
                     close = true;
                 }
-                if item_if(ui, "Export STEP…", "", shown) {
+                if item_if(ui, app.tr_label("Export STEP…"), "", shown) {
                     export(app, "step");
                     close = true;
                 }
@@ -539,15 +539,15 @@ pub fn file_menu(app: &mut SolveApp, ctx: &egui::Context) {
                     app.start("file.export_view_dxf");
                     close = true;
                 }
-                if item_if(ui, "Export OBJ…", "", shown) {
+                if item_if(ui, app.tr_label("Export OBJ…"), "", shown) {
                     export(app, "obj");
                     close = true;
                 }
-                if item_if(ui, "Export URDF…", "", shown) {
+                if item_if(ui, app.tr_label("Export URDF…"), "", shown) {
                     export(app, "urdf");
                     close = true;
                 }
-                if item(ui, "Export Design as JSON…", "") {
+                if item(ui, app.tr_label("Export Design as JSON…"), "") {
                     export(app, "json");
                     close = true;
                 }
