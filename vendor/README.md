@@ -108,3 +108,6 @@ SolidCraft changes:
   (the `wp::pointer_gestures` module); drop the example and test targets.
 - `src/event.rs`, `src/changelog/unreleased.md`: the platform notes of both events and the
   changelog entry.
+- `src/platform_impl/ios/window.rs`: `inner_size` is the whole window, as `Resized` reports it
+  (winit 0.31's `surface_size`), not the safe area; eframe 0.37 sizes its surface from it on
+  every resize, and a surface the size of the safe area was stretched over the whole screen.

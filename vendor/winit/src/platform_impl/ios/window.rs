@@ -183,14 +183,10 @@ impl Inner {
         self.window.setBounds(bounds);
     }
 
+    // The surface covers the whole window, as `Resized` reports it (winit 0.31's `surface_size`); eframe
+    // sizes its surface from this, and the safe area reaches egui as insets.
     pub fn inner_size(&self) -> PhysicalSize<u32> {
-        let scale_factor = self.scale_factor();
-        let safe_area = self.safe_area_screen_space();
-        let size = LogicalSize {
-            width: safe_area.size.width as f64,
-            height: safe_area.size.height as f64,
-        };
-        size.to_physical(scale_factor)
+        self.outer_size()
     }
 
     pub fn outer_size(&self) -> PhysicalSize<u32> {
