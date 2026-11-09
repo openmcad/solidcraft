@@ -1573,7 +1573,8 @@ fn rows_scrolling(app: &mut SolveApp, ui: &mut egui::Ui, acts: &mut Actions, shr
         // The card may animate all the way down to its header.
         .min_scrolled_height(0.0)
         .auto_shrink([false, shrink_height])
-        .scroll_source(egui::scroll_area::ScrollSource { scroll_bar: true, mouse_wheel: true, ..egui::scroll_area::ScrollSource::NONE })
+        // A finger drags the list on a touch screen, where rows sense only clicks (`ui_kit::tree`).
+        .scroll_source(egui::scroll_area::ScrollSource { scroll_bar: true, mouse_wheel: true, drag: egui::scroll_area::DragScroll::OnTouch })
         .show(ui, |ui| {
             ui.spacing_mut().item_spacing.y = 0.0;
             if crate::render_workspace::active(app) {
