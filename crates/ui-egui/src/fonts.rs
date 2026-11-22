@@ -417,6 +417,9 @@ const HEBREW_FONT_CANDIDATES: &[&str] = &[
     "/System/Library/Fonts/ArialHB.ttc",
     "/System/Library/Fonts/SFHebrew.ttf",
     "/System/Library/Fonts/Supplemental/Arial.ttf",
+    // iOS and iPadOS: SF Hebrew, Arial Hebrew
+    "/System/Library/Fonts/Core/SFHebrew.ttf",
+    "/System/Library/Fonts/Core/ArialHB.ttc",
     // Linux: Noto Sans Hebrew, DejaVu Sans
     "/usr/share/fonts/noto/NotoSansHebrew-Regular.ttf",
     "/usr/share/fonts/truetype/noto/NotoSansHebrew-Regular.ttf",
@@ -441,6 +444,9 @@ const ARABIC_FONT_CANDIDATES: &[&str] = &[
     "/System/Library/Fonts/Supplemental/GeezaPro.ttc",
     "/System/Library/Fonts/Supplemental/Damascus.ttc",
     "/System/Library/Fonts/Supplemental/Tahoma.ttf",
+    // iOS and iPadOS: SF Arabic, Geeza Pro
+    "/System/Library/Fonts/Core/SFArabic.ttf",
+    "/System/Library/Fonts/Core/GeezaPro.ttc",
     // Linux: Noto Sans Arabic, Noto Naskh Arabic, KACST One, DejaVu Sans
     "/usr/share/fonts/noto/NotoSansArabic-Regular.ttf",
     "/usr/share/fonts/truetype/noto/NotoSansArabic-Regular.ttf",
