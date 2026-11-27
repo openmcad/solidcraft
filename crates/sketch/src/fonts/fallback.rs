@@ -54,6 +54,8 @@ pub const JAPANESE: Candidates = &[
     ("Apple SD Gothic Neo", &["/System/Library/Fonts/AppleSDGothicNeo.ttc"]),
     ("Arial Unicode MS", &["/Library/Fonts/Arial Unicode.ttf"]),
     ("Hiragino Sans", &["/Library/Fonts/Hiragino Sans W3.ttc"]),
+    // iOS and iPadOS: system fonts sit in Fonts/Core, which the macOS folders do not cover
+    ("Hiragino Sans", &["/System/Library/Fonts/Core/HiraginoKakuGothic.ttc"]),
     // Linux
     (
         "Noto Sans CJK JP",
@@ -109,6 +111,8 @@ pub const SIMPLIFIED_CHINESE: Candidates = &[
     ("Heiti SC", &["/System/Library/Fonts/STHeiti Light.ttc", "/System/Library/Fonts/STHeiti Medium.ttc"]),
     ("Songti SC", &["/System/Library/Fonts/Supplemental/Songti.ttc"]),
     ("Arial Unicode MS", &["/System/Library/Fonts/Supplemental/Arial Unicode.ttf", "/Library/Fonts/Arial Unicode.ttf"]),
+    // iOS and iPadOS
+    ("PingFang SC", &["/System/Library/PrivateFrameworks/FontServices.framework/CorePrivate/PingFangUI.ttc"]),
     // Linux
     (
         "Noto Sans CJK SC",
@@ -129,6 +133,8 @@ pub const HANGUL: Candidates = &[
     // macOS
     ("Apple SD Gothic Neo", &["/System/Library/Fonts/AppleSDGothicNeo.ttc"]),
     ("AppleGothic", &["/System/Library/Fonts/Supplemental/AppleGothic.ttf"]),
+    // iOS and iPadOS
+    ("Apple SD Gothic Neo", &["/System/Library/Fonts/Core/AppleSDGothicNeo.ttc"]),
     // Linux
     ("NanumGothic", &["/usr/share/fonts/truetype/nanum/NanumGothic.ttf", "/usr/share/fonts/nanum/NanumGothic.ttf"]),
 ];
@@ -143,6 +149,8 @@ pub const THAI: Candidates = &[
     ("Thonburi", &["/System/Library/Fonts/Thonburi.ttc", "/System/Library/Fonts/Supplemental/Thonburi.ttc"]),
     ("Ayuthaya", &["/System/Library/Fonts/Supplemental/Ayuthaya.ttf"]),
     ("Thonburi", &["/Library/Fonts/Thonburi.ttf"]),
+    // iOS and iPadOS
+    ("Thonburi", &["/System/Library/Fonts/Core/Thonburi.ttc"]),
     // Linux
     (
         "Noto Sans Thai",
@@ -168,6 +176,9 @@ pub const HEBREW: Candidates = &[
     ("Arial Hebrew", &["/System/Library/Fonts/ArialHB.ttc"]),
     ("SF Hebrew", &["/System/Library/Fonts/SFHebrew.ttf"]),
     ("Arial", &["/System/Library/Fonts/Supplemental/Arial.ttf"]),
+    // iOS and iPadOS
+    ("SF Hebrew", &["/System/Library/Fonts/Core/SFHebrew.ttf"]),
+    ("Arial Hebrew", &["/System/Library/Fonts/Core/ArialHB.ttc"]),
     // Linux
     (
         "Noto Sans Hebrew",
@@ -193,6 +204,8 @@ pub const GEORGIAN: Candidates = &[
     ("Segoe UI", &["C:\\Windows\\Fonts\\segoeui.ttf"]),
     // macOS
     ("SF Georgian", &["/System/Library/Fonts/SFGeorgian.ttf"]),
+    // iOS and iPadOS
+    ("SF Georgian", &["/System/Library/Fonts/Core/SFGeorgian.ttf"]),
     // Linux
     (
         "Noto Sans Georgian",
@@ -221,6 +234,9 @@ pub const ARABIC: Candidates = &[
     ("Geeza Pro", &["/System/Library/Fonts/GeezaPro.ttc", "/System/Library/Fonts/Supplemental/GeezaPro.ttc"]),
     ("Damascus", &["/System/Library/Fonts/Supplemental/Damascus.ttc"]),
     ("Tahoma", &["/System/Library/Fonts/Supplemental/Tahoma.ttf"]),
+    // iOS and iPadOS
+    ("SF Arabic", &["/System/Library/Fonts/Core/SFArabic.ttf"]),
+    ("Geeza Pro", &["/System/Library/Fonts/Core/GeezaPro.ttc"]),
     // Linux
     (
         "Noto Sans Arabic",
@@ -260,6 +276,8 @@ pub const LAO: Candidates = &[
     ("Noto Sans Lao", &["/Library/Fonts/NotoSansLao-Regular.ttf"]),
     ("Lao Sangam MN", &["/System/Library/Fonts/Supplemental/Lao Sangam MN.ttf", "/System/Library/Fonts/Lao Sangam MN.ttf"]),
     ("Lao MN", &["/System/Library/Fonts/Supplemental/Lao MN.ttc", "/System/Library/Fonts/Lao MN.ttc"]),
+    // iOS and iPadOS
+    ("Lao Sangam MN", &["/System/Library/Fonts/Core/LaoSangamMN.ttf"]),
     // Linux
     (
         "Noto Sans Lao",
