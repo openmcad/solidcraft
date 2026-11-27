@@ -641,8 +641,9 @@ impl<'s> Browser<'s> {
                 .id_salt(base.with("rows"))
                 .min_scrolled_height(0.0)
                 .auto_shrink([false, shrink])
-                // A drag on the rows drags rows: only the bar and the wheel scroll.
-                .scroll_source(egui::scroll_area::ScrollSource { scroll_bar: true, mouse_wheel: true, ..egui::scroll_area::ScrollSource::NONE })
+                // A mouse drag on the rows drags rows: only the bar and the wheel scroll. A finger
+                // drags the list on a touch screen, where rows sense only clicks (`tree_row`).
+                .scroll_source(egui::scroll_area::ScrollSource { scroll_bar: true, mouse_wheel: true, drag: egui::scroll_area::DragScroll::OnTouch })
                 .show(ui, body);
             (area.inner, area.inner_rect, area.content_size.y)
         } else {
